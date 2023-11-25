@@ -5,6 +5,7 @@ import { AuthContext } from '../../contexts/AuthContext';
 import { signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 import { app, auth, db, database } from '../../firebaseConfig'; 
 
+
 const LandingPage = () => {
     const { currentUser } = useContext(AuthContext);
     const navigate = useNavigate();
@@ -19,6 +20,13 @@ const LandingPage = () => {
             .catch((error) => {
                 console.error('Error during sign-in:', error);
             });
+    };
+    const startSinglePlayerGame = () => {
+        navigate('/game/singleplayer'); // Adjust the path as per your routing setup
+    };
+
+    const startMultiPlayerGame = () => {
+        navigate('/game/multiplayer'); // Adjust the path as per your routing setup
     };
 
     return (
@@ -44,6 +52,8 @@ const LandingPage = () => {
                 <div className="welcome-back-message">
                     <p>Welcome back, {currentUser.displayName || currentUser.email}!</p>
                     <button onClick={() => navigate('/profile')}>Go to Your Profile</button>
+                    <button onClick={startSinglePlayerGame}>Play Single Player</button>
+                    <button onClick={startMultiPlayerGame}>Play Multiplayer</button>
                 </div>
             )}
         </div>
@@ -51,4 +61,3 @@ const LandingPage = () => {
 };
 
 export default LandingPage;
-

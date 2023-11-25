@@ -7,8 +7,16 @@ const UserProfile = () => {
     const { currentUser } = useContext(AuthContext);
     const navigate = useNavigate();
 
-    const goToGamePage = () => {
-        navigate('/game'); // Replace '/game' with the actual path to your game page
+    // const goToGamePage = () => {
+    //     navigate('/game'); // Replace '/game' with the actual path to your game page
+    // };
+
+    const startSinglePlayerGame = () => {
+        navigate('/game/singleplayer'); // Adjust the path as per your routing setup
+    };
+
+    const startMultiPlayerGame = () => {
+        navigate('/game/multiplayer'); // Adjust the path as per your routing setup
     };
 
     return (
@@ -19,9 +27,12 @@ const UserProfile = () => {
             <p>Email: {currentUser?.email}</p>
             {/* More user details */}
 
-            <button onClick={goToGamePage} className="go-to-game-button">
+            {/* <button onClick={goToGamePage} className="go-to-game-button">
                 Play
-            </button>
+            </button> */}
+
+            <button onClick={startSinglePlayerGame} className="go-to-game-button">Play Single Player</button>
+            <button onClick={startMultiPlayerGame} className="go-to-game-button">Play Multiplayer</button>
         </div>
     );
 };
