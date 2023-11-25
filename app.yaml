@@ -15,3 +15,11 @@ handlers:
 - url: /(.*\.(json|ico|js|css|png|jpg|jpeg|svg))  # Route to static files
   static_files: build/\1
   upload: build/.*\.(json|ico|js|css|png|jpg|jpeg|svg)
+
+skip_files:  # List of files and directories to skip during deployment
+- ^node_modules$
+- ^src$
+- ^README.md$
+- ^package.json$
+- ^package-lock.json$
+- ^.gitignore$
