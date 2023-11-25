@@ -1,0 +1,17 @@
+runtime: nodejs14  # Specify the Node.js runtime
+
+env: standard  # Use the standard environment
+
+instance_class: F1  # Choose an instance class (F1 is the smallest)
+
+automatic_scaling:  # Configure automatic scaling
+  max_instances: 1  # Maximum number of instances
+
+handlers:
+- url: /.*  # Route all traffic to the main index.html
+  static_files: build/index.html
+  upload: build/index.html
+
+- url: /(.*\.(json|ico|js|css|png|jpg|jpeg|svg))  # Route to static files
+  static_files: build/\1
+  upload: build/.*\.(json|ico|js|css|png|jpg|jpeg|svg)
