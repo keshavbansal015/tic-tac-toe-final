@@ -1,9 +1,10 @@
 import React from 'react';
-import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
+// import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
+import { signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
+import { app, auth, db, database } from '../../firebaseConfig'; 
 
 function LandingPage() {
     const handleSignIn = () => {
-        const auth = getAuth();
         const provider = new GoogleAuthProvider();
         signInWithPopup(auth, provider)
             .then((result) => {

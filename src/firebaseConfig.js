@@ -24,5 +24,5 @@ const auth = getAuth(app);
 const database = getDatabase(app);
 
 // Export the Firebase services for use in your app
-export { db, auth, database };
+export { db, auth, database, app };
 
