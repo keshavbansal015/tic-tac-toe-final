@@ -1,0 +1,21 @@
+.landing-page {
+    text-align: center;
+    padding: 20px;
+}
+
+.game-description {
+    margin: 20px 0;
+}
+
+.login-button, .welcome-back-message button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}

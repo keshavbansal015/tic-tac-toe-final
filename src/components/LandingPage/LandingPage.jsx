@@ -1,19 +1,22 @@
-import React from 'react';
-// import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
+import React, { useContext,useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import './LandingPage.css';
+import { AuthContext } from '../../contexts/AuthContext';
 import { signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 import { app, auth, db, database } from '../../firebaseConfig'; 
 
-function LandingPage() {
+const LandingPage = () => {
+    const { currentUser } = useContext(AuthContext);
+    const navigate = useNavigate();
+
     const handleSignIn = () => {
         const provider = new GoogleAuthProvider();
         signInWithPopup(auth, provider)
             .then((result) => {
-                // This gives you a Google Access Token. You can use it to access the Google API.
                 console.log('User signed in:', result.user);
-                // Redirect to game or user dashboard
+                navigate('/profile'); // Redirect after successful sign-in
             })
             .catch((error) => {
-                // Handle Errors here.
                 console.error('Error during sign-in:', error);
             });
     };
@@ -21,9 +24,9 @@ function LandingPage() {
     return (
         <div className="landing-page">
             <h1>Welcome to Tic-Tac-Toe!</h1>
-            <p>Get ready to challenge your friends in a classic game of Tic-Tac-Toe.</p>
-            <button onClick={handleSignIn}>Sign in with Google</button>
-            <div className="game-instructions">
+            <p>Challenge your friends or play against AI in this classic game.</p>
+            
+            <section className="game-description">
                 <h2>How to Play:</h2>
                 <ul>
                     <li>Sign in with your Google account.</li>
@@ -31,9 +34,21 @@ function LandingPage() {
                     <li>Take turns to place your mark (X or O) in the grid.</li>
                     <li>The first player to align three marks wins!</li>
                 </ul>
-            </div>
+            </section>
+
+            {!currentUser && (
+                <button onClick={handleSignIn}>Sign in with Google</button>
+            )}
+
+            {currentUser && (
+                <div className="welcome-back-message">
+                    <p>Welcome back, {currentUser.displayName || currentUser.email}!</p>
+                    <button onClick={() => navigate('/profile')}>Go to Your Profile</button>
+                </div>
+            )}
         </div>
     );
-}
+};
 
 export default LandingPage;
+
