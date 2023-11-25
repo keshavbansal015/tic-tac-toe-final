@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import BoardRow from "./BoardRow";
+import BoardRow from "../BoardRow/BoardRow";
 import "./Board.css";  // Ensure you have Board.css for styling
 
 function Board() {
