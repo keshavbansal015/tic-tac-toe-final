@@ -1,0 +1,13 @@
+.go-to-game-button {
+    background-color: #4CAF50; /* Example color - green */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.go-to-game-button:hover {
+    background-color: #45a049; /* Darker green on hover */
+}
