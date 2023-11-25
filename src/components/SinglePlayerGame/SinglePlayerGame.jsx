@@ -55,10 +55,6 @@ function SinglePlayerGame() {
     return (
         <div className="single-player-game">
             <Board board={board} onSquareClick={handlePlayerMove} />
-            <div className="game-info">
-                <div>{winner ? `Winner: ${winner}` : (isPlayerTurn ? "Your Turn" : "Computer's Turn")}</div>
-                <button onClick={resetGame}>Start New Game</button>
-            </div>
         </div>
     );
 }
