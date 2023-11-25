@@ -24,6 +24,23 @@ function Board() {
         return null;
     };
 
+    // Reset game function
+    const resetGame = () => {
+        setBoard(initialBoard);
+        setXIsNext(true);
+    };
+
+    const winner = calculateWinner(board);
+    const isBoardFull = board.every((cell) => cell !== null);
+
+    const statusMessage = winner
+        ? `Winner: ${winner}`
+        : isBoardFull
+        ? 'Tie Game!'
+        : `Next Player: ${xIsNext ? 'X' : 'O'}`;
+
+
+
     // Function to handle a move
     const handleClick = (index) => {
         const newBoard = [...board];
@@ -36,10 +53,14 @@ function Board() {
     };
 
     return (
-        <div className="game-board">
-            {Array(3).fill(null).map((_, row) => (
-                <BoardRow key={row} row={row} board={board} onClick={handleClick} />
-            ))}
+        <div>
+            <div className="status">{statusMessage}</div>
+            <div className="game-board">
+                {Array(3).fill(null).map((_, row) => (
+                    <BoardRow key={row} row={row} board={board} onClick={handleClick} />
+                ))}
+            </div>
+            <button className="reset-button" onClick={resetGame}>New Game</button>
         </div>
     );
 }

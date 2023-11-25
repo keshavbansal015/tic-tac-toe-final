@@ -1,0 +1,17 @@
+.board-row {
+    display: flex;
+}
+
+.square {
+    width: 60px; /* Or any appropriate size */
+    height: 60px;
+    margin: 2px;
+    background-color: #ddd;
+    border: 1px solid #666;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.square:empty {
+    background-color: #f9f9f9; /* Lighter background for empty squares */
+}

@@ -1,5 +1,6 @@
 import React from 'react';
 import "./BoardRow.css";  // Ensure you have BoardRow.css for styling
+import Square from '../Square/Square'; // Assuming you have a Square component
 
 const BoardRow = ({ row, board, onClick }) => {
     return (
@@ -7,13 +8,18 @@ const BoardRow = ({ row, board, onClick }) => {
             {Array(3).fill(null).map((_, col) => {
                 const index = row * 3 + col;
                 return (
-                    <button 
+                    // <button 
+                    //     key={index} 
+                    //     className="square" 
+                    //     onClick={() => onClick(index)}
+                    // >
+                    //     {board[index]}
+                    // </button>
+                    <Square 
                         key={index} 
-                        className="square" 
-                        onClick={() => onClick(index)}
-                    >
-                        {board[index]}
-                    </button>
+                        value={board[index]} 
+                        onClick={() => onClick(index)} 
+                    />
                 );
             })}
         </div>
