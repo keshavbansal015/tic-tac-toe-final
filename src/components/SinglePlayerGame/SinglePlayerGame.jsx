@@ -41,6 +41,7 @@ function SinglePlayerGame() {
             }, 500); // A short delay before the computer move
         }
         return () => clearTimeout(timeout);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [board, isPlayerTurn]);
 
     // Function to reset the game

@@ -33,11 +33,11 @@ const LandingPage = () => {
     if (!docSnap.exists()) {
       await setDoc(userRef, {
         email: user.email,
-        name: user.displayName,
+        name: user.displayName || "",
         // ... other user properties you want to save
-        wins: user.wins,
-        loses: user.loses,
-        draws: user.draws,
+        wins: user.wins || 0,
+        loses: user.losses || 0,
+        draws: user.draws || 0,
       });
     }
   };
