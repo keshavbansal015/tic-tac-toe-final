@@ -11,5 +11,30 @@ service cloud.firestore {
       allow read, write: if request.auth != null && request.auth.uid == userId;
     }
   }
+  match /databases/{database}/documents {
+    match /users/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+    match /games/{gameId} {
+      allow read: if isPlayerInGame(request.auth.uid, gameId);
+      allow write: if request.auth != null && isGameEditableByUser(gameId, request.auth.uid);
+    }
+
+    // Matchmaking and game history rules
+    // Define these based on your app's logic
+
+  }
 }
 
+// Custom function to check if a user is part of a game
+function isPlayerInGame(userId, gameId) {
+  return exists(/databases/$(database)/documents/games/$(gameId)/players/$(userId));
+}
+
+// Custom function to check if the game is editable by the user
+function isGameEditableByUser(gameId, userId) {
+  let game = get(/databases/$(database)/documents/games/$(gameId));
+  return game.data.players[userId] != null && 
+         game.data.currentTurn == userId &&
+         game.data.status == 'in_progress';
+}

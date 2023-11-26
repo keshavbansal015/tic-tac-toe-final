@@ -17,3 +17,35 @@ const logger = require("firebase-functions/logger");
 //   logger.info("Hello logs!", {structuredData: true});
 //   response.send("Hello from Firebase!");
 // });
+const functions = require('firebase-functions');
+const nodemailer = require('nodemailer');
+
+// Configure your email transport
+const mailTransport = nodemailer.createTransport({
+    service: 'gmail', // or another email provider
+    auth: {
+        user: process.env.GMAIL,
+        pass: process.env.PASS,
+    },
+});
+
+exports.sendWelcomeEmail = functions.auth.user().onCreate((user) => {
+    const email = user.email; // The email of the user.
+    const displayName = user.displayName || 'Valued User'; // The display name of the user.
+
+    const mailOptions = {
+        from: 'Tic-tac-toe',
+        to: email,
+        subject: 'Welcome to Our App!',
+        text: `Hello ${displayName}! Welcome to our app. We hope you enjoy using it.`,
+        // You can also use HTML for the email body
+    };
+
+    return mailTransport.sendMail(mailOptions)
+        .then(() => {
+            return console.log('Welcome email sent to:', email);
+        })
+        .catch((error) => {
+            return console.error('There was an error while sending the email:', error);
+        });
+});
