@@ -1,61 +1,67 @@
-import React, { useState, useEffect } from 'react';
-import Board from '../Board/Board'; // Your existing Board component
-import calculateWinner from '../../utils/calculateWinner'; // Function to calculate the winner
-import './SinglePlayerGame.css';
+import React, { useState, useEffect, useCallback, useContext } from "react";
+import Board from "../Board/Board";
+import calculateWinner from "../../utils/calculateWinner";
+import updateUserStats from "../../utils/updateUserStats";
+import { AuthContext } from "../../contexts/AuthContext";
+import "./SinglePlayerGame.css";
 
 function SinglePlayerGame() {
     const initialBoard = Array(9).fill(null);
     const [board, setBoard] = useState(initialBoard);
     const [isPlayerTurn, setIsPlayerTurn] = useState(true);
+    const { currentUser } = useContext(AuthContext);
 
-    // Function to handle player's move
+    const computerMove = useCallback(() => {
+        const emptyIndices = board
+            .map((square, index) => (square === null ? index : null))
+            .filter((index) => index !== null);
+        if (emptyIndices.length === 0) return;
+
+        const randomIndex = emptyIndices[Math.floor(Math.random() * emptyIndices.length)];
+        const newBoard = [...board];
+        newBoard[randomIndex] = "O";
+        setBoard(newBoard);
+        setIsPlayerTurn(true); // Switch turn back to the player
+    }, [board, setBoard]);
+
     const handlePlayerMove = (index) => {
         if (!board[index] && isPlayerTurn && !calculateWinner(board)) {
             const newBoard = [...board];
-            newBoard[index] = 'X'; // Assuming the player is 'X'
+            newBoard[index] = "X";
             setBoard(newBoard);
             setIsPlayerTurn(false);
         }
     };
 
-    // Function for computer's move (simple AI)
-    const computerMove = () => {
-        // Get empty squares
-        const emptySquares = board.map((value, idx) => value === null ? idx : null).filter(v => v !== null);
-        if (emptySquares.length === 0) return;
-
-        // Random move
-        const randomIndex = emptySquares[Math.floor(Math.random() * emptySquares.length)];
-        const newBoard = [...board];
-        newBoard[randomIndex] = 'O'; // Assuming the computer is 'O'
-        setBoard(newBoard);
-        setIsPlayerTurn(true);
-    };
-
-    // Run computer's move when it's not the player's turn
-    useEffect(() => {
-        let timeout;
-        if (!isPlayerTurn && !calculateWinner(board)) {
-            timeout = setTimeout(() => {
-                computerMove();
-            }, 500); // A short delay before the computer move
+    const onGameEnd = useCallback((result) => {
+        if (currentUser) {
+            updateUserStats(currentUser.uid, result);
         }
-        return () => clearTimeout(timeout);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [board, isPlayerTurn]);
+    }, [currentUser]);
 
-    // Function to reset the game
-    const resetGame = () => {
+    useEffect(() => {
+        const winner = calculateWinner(board);
+        if (winner) {
+            onGameEnd(winner === "X" ? "wins" : "losses");
+        } else if (board.every((cell) => cell !== null)) {
+            onGameEnd("draws");
+        } else if (!isPlayerTurn && !winner) {
+            setTimeout(computerMove, 500); // Delay for the computer's move
+        }
+    }, [board, isPlayerTurn, onGameEnd, computerMove]);
+
+    const resetGame = useCallback(() => {
         setBoard(initialBoard);
-        setIsPlayerTurn(true);
-    };
+        setIsPlayerTurn(true); // Reset to player's turn
+    }, []);
 
-    // Check for winner
     const winner = calculateWinner(board);
 
     return (
         <div className="single-player-game">
             <Board board={board} onSquareClick={handlePlayerMove} />
+            {winner && <p>Winner: {winner}</p>}
+            <button onClick={resetGame}>Reset Game</button>
         </div>
     );
 }
