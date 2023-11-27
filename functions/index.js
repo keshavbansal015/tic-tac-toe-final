@@ -1,53 +1,36 @@
-/**
- * Import function triggers from their respective submodules:
- *
- * const {onCall} = require("firebase-functions/v2/https");
- * const {onDocumentWritten} = require("firebase-functions/v2/firestore");
- *
- * See a full list of supported triggers at https://firebase.google.com/docs/functions
- */
+import { config, firestore } from 'firebase-functions';
+import { initializeApp } from 'firebase-admin';
+import { createTransport } from 'nodemailer';
+initializeApp();
 
-const {onRequest} = require("firebase-functions/v2/https");
-const logger = require("firebase-functions/logger");
-
-// Create and deploy your first functions
-// https://firebase.google.com/docs/functions/get-started
-
-// exports.helloWorld = onRequest((request, response) => {
-//   logger.info("Hello logs!", {structuredData: true});
-//   response.send("Hello from Firebase!");
-// });
-
-const functions = require('firebase-functions');
-const nodemailer = require('nodemailer');
-
-// Configure your email transport
-const mailTransport = nodemailer.createTransport({
-    service: 'gmail', // or another email provider
+// Setting up Nodemailer with SMTP details
+const transporter = createTransport({
+    service: 'gmail', // Replace with your email service
     auth: {
-        user: 'keshavbansal015@gmail.com',
-        // pass: functions.config().gmail.password,
-        pass: 'efqv koib dffx ttca',
+        user: config().gmail.email, // Set these in your Firebase config
+        pass: config().gmail.password,
     },
 });
 
-exports.sendWelcomeEmail = functions.auth.user().onCreate((user) => {
-    const email = user.email; // The email of the user.
-    const displayName = user.displayName || 'Valued User'; // The display name of the user.
+export const sendWelcomeEmail = firestore
+    .document('users/{userId}')
+    .onCreate((snap, context) => {
+        const newUser = snap.data();
+        const email = newUser.email; // Assuming email field exists
+        const mailOptions = {
+            from: config().gmail.email, // Replace with your email
+            to: email,
+            subject: 'Welcome to Our App!',
+            text: `Welcome ${newUser.name}! Thank you for joining us.`,
+            // You can also use HTML for the body
+        };
 
-    const mailOptions = {
-        from: 'keshavbansal015@gmail.com',
-        to: email,
-        subject: 'Welcome to Our App!',
-        text: `Hello ${displayName}! Welcome to our app. We hope you enjoy using it.`,
-        // You can also use HTML for the email body
-    };
-
-    return mailTransport.sendMail(mailOptions)
-        .then(() => {
-            return console.log('Welcome email sent to:', email);
-        })
-        .catch((error) => {
-            return console.error('There was an error while sending the email:', error);
+        return transporter.sendMail(mailOptions, (error, info) => {
+            if (error) {
+                console.log('Error sending email', error);
+                return false;
+            }
+            console.log('Email sent: ' + info.response);
+            return true;
         });
-});
+    });

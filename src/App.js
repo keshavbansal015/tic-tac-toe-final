@@ -35,15 +35,6 @@ function App() {
                 </ProtectedRoute>
               }
             />
-            {/* <Route
-              path="/game"
-              element={
-                <ProtectedRoute>
-                  <GamePage />
-                </ProtectedRoute>
-              }
-            /> */}
-
             <Route
               path="/game/singleplayer"
               element={
