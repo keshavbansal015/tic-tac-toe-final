@@ -53,7 +53,7 @@ function SinglePlayerGame() {
     const resetGame = useCallback(() => {
         setBoard(initialBoard);
         setIsPlayerTurn(true); // Reset to player's turn
-    }, []);
+    }, [initialBoard]);
 
     const winner = calculateWinner(board);
 

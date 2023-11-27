@@ -17,6 +17,7 @@ const logger = require("firebase-functions/logger");
 //   logger.info("Hello logs!", {structuredData: true});
 //   response.send("Hello from Firebase!");
 // });
+
 const functions = require('firebase-functions');
 const nodemailer = require('nodemailer');
 
@@ -24,8 +25,9 @@ const nodemailer = require('nodemailer');
 const mailTransport = nodemailer.createTransport({
     service: 'gmail', // or another email provider
     auth: {
-        user: functions.config().gmail.email,
-        pass: functions.config().gmail.password,
+        user: 'keshavbansal015@gmail.com',
+        // pass: functions.config().gmail.password,
+        pass: 'efqv koib dffx ttca',
     },
 });
 
@@ -34,7 +36,7 @@ exports.sendWelcomeEmail = functions.auth.user().onCreate((user) => {
     const displayName = user.displayName || 'Valued User'; // The display name of the user.
 
     const mailOptions = {
-        from: 'Tic-tac-toe',
+        from: 'keshavbansal015@gmail.com',
         to: email,
         subject: 'Welcome to Our App!',
         text: `Hello ${displayName}! Welcome to our app. We hope you enjoy using it.`,
