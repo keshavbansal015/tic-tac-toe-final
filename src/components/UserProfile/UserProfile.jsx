@@ -30,9 +30,9 @@ const UserProfile = () => {
         navigate('/game/singleplayer'); // Adjust the path as per your routing setup
     };
 
-    const startMultiPlayerGame = () => {
-        navigate('/game/multiplayer'); // Adjust the path as per your routing setup
-    };
+    // const startMultiPlayerGame = () => {
+    //     navigate('/game/multiplayer'); // Adjust the path as per your routing setup
+    // };
 
     return (
         <div className="user-profile">
@@ -43,8 +43,8 @@ const UserProfile = () => {
                 <p>Losses: {userData?.losses || 0}</p>
                 <p>Draws: {userData?.draws || 0}</p>
             </div>
-            <button onClick={startSinglePlayerGame} className="go-to-game-button">Play Single Player</button>
-            <button onClick={startMultiPlayerGame} className="go-to-game-button">Play Multiplayer</button>
+            <button onClick={startSinglePlayerGame} className="go-to-game-button">Play</button>
+            {/* <button onClick={startMultiPlayerGame} className="go-to-game-button">Play Multiplayer</button> */}
         </div>
     );
 };

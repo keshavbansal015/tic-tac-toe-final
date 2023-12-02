@@ -46,9 +46,9 @@ const LandingPage = () => {
     navigate("/game/singleplayer"); // Adjust the path as per your routing setup
   };
 
-  const startMultiPlayerGame = () => {
-    navigate("/game/multiplayer"); // Adjust the path as per your routing setup
-  };
+  // const startMultiPlayerGame = () => {
+  //   navigate("/game/multiplayer"); // Adjust the path as per your routing setup
+  // };
 
   return (
     <div className="landing-page">
@@ -75,8 +75,8 @@ const LandingPage = () => {
           <button onClick={() => navigate("/profile")}>
             Go to Your Profile
           </button>
-          <button onClick={startSinglePlayerGame}>Play Single Player</button>
-          <button onClick={startMultiPlayerGame}>Play Multiplayer</button>
+          <button onClick={startSinglePlayerGame}>Play</button>
+          {/* <button onClick={startMultiPlayerGame}>Play Multiplayer</button> */}
         </div>
       )}
     </div>
