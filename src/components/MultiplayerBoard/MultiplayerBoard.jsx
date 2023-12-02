@@ -4,7 +4,7 @@ import MultiplayerSquare from "../MultiplayerSquare/MultiplayerSquare"; // New S
 const MultiplayerBoard = ({ board, onSquareClick }) => {
   if (!board) {
     console.error("Board data is undefined");
-    return null; // Or render some fallback UI
+    return null;
   }
   return (
     <div className="multiplayer-board">
