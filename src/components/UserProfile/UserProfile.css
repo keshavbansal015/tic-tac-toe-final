@@ -1,4 +1,5 @@
 /* Base Styles */
+
 body {
   margin: 0;
   padding: 0;
@@ -37,9 +38,8 @@ body {
   box-shadow: var(--box-shadow);
   border: 3px solid #ffffff; /* White border */
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  top: 30%;
+  left: 35%;
   text-align: center;
   max-width: 500px;
   width: 100%;
@@ -63,20 +63,28 @@ body {
 
 /* Stats Styles */
 .stats {
+  color: #ffffff;
   background: var(--gradient-profile);
   padding: 20px;
   border-radius: var(--border-radius);
   box-shadow: var(--box-shadow);
   margin-bottom: 20px;
   width: 100%;
+  border: 3px solid #ffffff;
+  transition: box-shadow var(--transition-slow), border var(--transition-slow),
+    transform var(--transition-fast);
 }
 
 .stats p {
   font-size: var(--font-size-medium);
-  color: var(--color-text-light);
   margin: 10px 0;
 }
 
+.stats:hover {
+  box-shadow: var(--hover-shadow); /* Larger shadow on hover */
+  transform: translateY(-2px); /* Slight lift on hover */
+  border: 2px solid #ff758c; /* Change border color on hover */
+}
 /* Button Styles */
 .play-button {
   background-image: linear-gradient(to right, #5585d1, rgb(184, 83, 212));

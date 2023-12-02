@@ -1,17 +1,11 @@
 .board-row {
-    display: flex;
-}
-
-.square {
-    width: 60px; /* Or any appropriate size */
-    height: 60px;
-    margin: 2px;
-    background-color: #ddd;
-    border: 1px solid #666;
-    font-size: 24px;
-    font-weight: bold;
-}
-
-.square:empty {
-    background-color: #f9f9f9; /* Lighter background for empty squares */
-}
+    display: flex; /* Use flexbox for horizontal alignment */
+    justify-content: center; /* Center squares horizontally */
+    align-items: center; /* Center squares vertically */
+  }
+  
+  /* Optional: If you still see spacing issues, you may target the squares directly */
+  .board-row .square {
+    margin: 1px; /* Remove margin to ensure squares are tightly packed */
+  }
+  

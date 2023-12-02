@@ -1,23 +1,45 @@
 .square {
-  background-color: #f0f0f0;
-  border: 1px solid #ddd;
+  width: 100px; /* Adjust the size as needed */
+  height: 100px; /* Ensuring square shape */
+  background-image: linear-gradient(
+    to right,
+    #eef3f4,
+    #b2ebf9
+  ); /* Example gradient */
+  padding: 5px; /* Adjust padding as needed */
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 2em;
-  color: #333;
+  color: #fff; /* Adjust text color as needed */
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: all var(--transition-slow);
+  border-radius: 20px;
+  border: 3px solid #ffffff;
+  box-shadow: var(--box-shadow);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin: 5px;
+  text-shadow: 0.5px 0.5px 1px rgba(0, 0, 0, 0.5);
 }
 
 .square:hover {
-  background-color: #e4e4e4;
+  background-image: linear-gradient(
+    to right,
+    #f1f5f6,
+    #6dd5fa
+  ); /* Slightly different gradient on hover */
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+  border: 2px solid #ff758c;
 }
 
 .square.X {
-  color: #ff4500; /* Or any color for X */
+  color: #ff4500; /* Example color for X */
+  text-shadow: 1px 1px 2px black; /* Adding a subtle shadow to make it stand out */
 }
 
 .square.O {
-  color: #0045ff; /* Or any color for O */
+  color: #0045ff; /* Example color for O */
+  text-shadow: 1px 1px 2px black; /* Adding a subtle shadow to make it stand out */
 }
