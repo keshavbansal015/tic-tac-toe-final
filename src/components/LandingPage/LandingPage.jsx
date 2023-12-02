@@ -52,33 +52,45 @@ const LandingPage = () => {
 
   return (
     <div className="landing-page">
-      <h1>Welcome to Tic-Tac-Toe!</h1>
-      <p>Challenge your friends or play against AI in this classic game.</p>
+      <header className="landing-header">
+        <h1>Welcome to Tic-Tac-Toe!</h1>
+        <p>Challenge your friends or play against AI in this classic game.</p>
+      </header>
 
-      <section className="game-description">
-        <h2>How to Play:</h2>
-        <ul>
-          <li>Sign in with your Google account.</li>
-          <li>Choose to start a new game or join an existing one.</li>
-          <li>Take turns to place your mark (X or O) in the grid.</li>
-          <li>The first player to align three marks wins!</li>
-        </ul>
-      </section>
+      <main className="landing-main">
+        <section className="game-description">
+          <h2>How to Play:</h2>
+            <p>Sign in with your Google account.</p>
+            <p>Choose to start a new game or join an existing one.</p>
+            <p>Take turns to place your mark (X or O) in the grid.</p>
+            <p>The first player to align three marks wins!</p>
+        </section>
 
-      {!currentUser && (
-        <button onClick={handleSignIn}>Sign in with Google</button>
-      )}
+        <section className="landing-actions">
+          {!currentUser && (
+            <button className="sign-in-button" onClick={handleSignIn}>
+              Sign in with Google
+            </button>
+          )}
 
-      {currentUser && (
-        <div className="welcome-back-message">
-          <p>Welcome back, {currentUser.displayName || currentUser.email}!</p>
-          <button onClick={() => navigate("/profile")}>
-            Go to Your Profile
-          </button>
-          <button onClick={startSinglePlayerGame}>Play</button>
-          {/* <button onClick={startMultiPlayerGame}>Play Multiplayer</button> */}
-        </div>
-      )}
+          {currentUser && (
+            <div className="welcome-back-message">
+              <p>
+                Welcome back, {currentUser.displayName || currentUser.email}!
+              </p>
+              <button
+                className="profile-button"
+                onClick={() => navigate("/profile")}
+              >
+                Go to Your Profile
+              </button>
+              <button className="play-button" onClick={startSinglePlayerGame}>
+                Play
+              </button>
+            </div>
+          )}
+        </section>
+      </main>
     </div>
   );
 };

@@ -23,7 +23,7 @@ const NavBar = () => {
             {currentUser ? (
                 <>
                     <Link to="/profile">Profile</Link>
-                    <button onClick={handleSignOut}>Sign Out</button>
+                    <button className="sign-out" onClick={handleSignOut}>Sign Out</button>
                 </>
             ) : (
                 <Link to="/login">Login</Link>

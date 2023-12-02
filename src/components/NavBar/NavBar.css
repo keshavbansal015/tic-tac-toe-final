@@ -1,20 +1,45 @@
+/* Navbar Styles */
 .navbar {
-    background-color: #333;
-    color: white;
-    padding: 10px;
+    background-color: #333; /* Dark background for contrast with white text */
+    color: #ffffff;
     display: flex;
-    justify-content: space-between;
-}
-
-.navbar a {
-    color: white;
-    padding: 10px;
-    text-decoration: none;
-}
-
-.navbar button {
-    background: none;
-    color: white;
-    border: none;
+    justify-content: center; /* Center items horizontally */
+    align-items: center; /* Center items vertically */
+    padding: 0 20px; /* Horizontal padding */
+    height: 60px; /* Fixed height */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Adds subtle shadow for depth */
+    position: fixed; /* Fixes navbar to the top */
+    width: 100%; /* Full width */
+    top: 0; /* Aligns to the top */
+    left: 0; /* Aligns to the left */
+    z-index: 1000; /* Ensures navbar is above other elements */
+  }
+  
+  /* Navbar Link Styles */
+  .navbar a, .navbar .sign-out {
+    color: #ffffff;
+    text-decoration: none; /* Removes underline from links */
+    margin: 0 10px; /* Spacing between links */
+    font-weight: bold;
+    transition: transform 0.3s ease, color 0.3s ease; /* Smooth transition for hover effects */
+    padding: 8px 16px; /* Padding for clickable area */
+    border-radius: 4px; /* Rounded corners */
+    display: inline-block; /* Necessary for padding and margins to take effect */
+  }
+  
+  .navbar a:hover, .navbar .sign-out:hover {
+    color: #a8a8a8; /* Lightens link color on hover */
+    transform: translateY(-3px); /* Moves link/button up slightly on hover */
+  }
+  
+  /* Specific styles for the sign-out button */
+  .navbar .sign-out {
+    background-color: transparent; /* To differentiate from links if needed */
+    border: 1px solid #ffffff; /* Adds a subtle border */
     cursor: pointer;
-}
+  }
+  
+  .navbar .sign-out:hover {
+    background-color: #555; /* Darkens button on hover for a button-like effect */
+  }
+  

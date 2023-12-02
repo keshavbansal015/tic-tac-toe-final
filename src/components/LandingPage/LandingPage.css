@@ -1,21 +1,170 @@
+/* LandingPage.css */
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.landing-page > *:first-child {
+  margin-top: 0;
+}
+
 .landing-page {
-    text-align: center;
-    padding: 20px;
+  background: linear-gradient(135deg, #5585d1 0%, rgb(184, 83, 212) 100%);
+  color: #FFFFFF; /* White text color for better contrast */
+  font-family: "Arial", sans-serif;
+  padding: 20px;
+  margin-top: 60px; /* Assuming navbar height is 60px */
+  height: calc(100vh - 60px); /* Full viewport height minus navbar height */
+  overflow: auto; /* Scroll if content exceeds screen height */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
-.game-description {
-    margin: 20px 0;
+/* Header Styles */
+.landing-header h1 {
+  font-size: 2.5em;
+  margin-bottom: 0.5em; /* Adds space between the title and subtitle */
+  text-align: center;
+  color: #ffffff; /* White color for better contrast */
 }
 
-.login-button, .welcome-back-message button {
-    background-color: #4CAF50; /* Green */
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
+.landing-header p {
+  font-size: 1.2em;
+  text-align: center;
+  margin-bottom: 1em;
+  color: #ffffff; /* White color for better contrast */
 }
+
+/* Main Content Styles */
+.landing-main {
+  max-width: 600px;
+  text-align: center;
+}
+
+/* Game Description Section */
+.game-description h2 {
+  font-size: 1.8em;
+  margin-bottom: 1em;
+  color: #ffffff; /* White color for better contrast */
+}
+
+.game-description p {
+  font-size: 1em;
+  margin-bottom: 0.8em;
+  color: #ffffff; /* White color for better contrast */
+}
+
+/* Welcome Back Message Styles */
+.welcome-back-message {
+  color: #ffffff; /* White text color for contrast */
+  padding: 20px;
+  border-radius: 10px; /* Rounded corners */
+  text-align: center;
+  margin-top: 20px; /* Space from the above content */
+  max-width: 500px; /* To control the width of this section */
+  box-shadow: 10 4px 6px rgba(0, 0, 0, 0.1); /* Initial shadow */
+  transition: box-shadow 0.2s; /* Smooth transition for shadow */
+}
+
+
+.welcome-back-message p {
+  font-size: 1.2em;
+  margin-bottom: 1em;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+  line-height: 1.4;
+}
+
+/* Button Styles */
+.sign-in-button, .profile-button, .play-button {
+  background-image: linear-gradient(to right, #5585d1, rgb(184, 83, 212)); /* Adjusted gradient effect to match landing page */
+  color: #ffffff; /* White text color for contrast */
+  padding: 12px 25px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  border-radius: 30px; /* Rounded corners */
+  border: 3px solid #ffffff; /* White border for contrast */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  font-size: 1em;
+  text-transform: uppercase; /* Uppercase text */
+  letter-spacing: 1.5px; /* Increased spacing between letters */
+  margin: 10px; /* Margin around each button */
+  display: inline-block; /* Inline display for alignment */
+  text-shadow: 0.5px 0.5px 1px rgba(0, 0, 0, 0.5); /* Text shadow for depth */
+}
+
+.sign-in-button:hover,
+.profile-button:hover,
+.play-button:hover {
+  background-image: linear-gradient(
+    to right,
+    #5585d1,
+    #6dd5fa
+  ); /* Invert gradient on hover */
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15); /* Larger shadow on hover */
+  transform: translateY(-2px); /* Slight lift on hover */
+  border: 2px solid #ff758c; /* Change border color on hover */
+}
+
+/* Welcome Back Message Styles */
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .sign-in-button,
+  .profile-button,
+  .play-button {
+    padding: 10px 20px;
+    font-size: 0.9em;
+    margin: 8px; /* Slightly reduced margin for smaller screens */
+  }
+}
+
+@media (max-width: 768px) {
+  .welcome-back-message {
+    padding: 15px;
+    margin-top: 15px;
+  }
+
+  .welcome-back-message p {
+    font-size: 1em;
+  }
+}
+
+/* Global Styles for Paragraphs */
+p {
+  font-weight: bold; /* Makes text bold */
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Text shadow for depth */
+  transition: transform 0.3s ease; /* Transition for hover animation */
+}
+
+p:hover {
+  transform: scale(1.05); /* Slightly increase size on hover */
+}
+
+/* Global Styles for Headings */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: bold; /* Makes text bold */
+  text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.5); /* More pronounced text shadow for headings */
+  transition: transform 0.3s ease; /* Transition for hover animation */
+}
+
+h1:hover, h2:hover, h3:hover, h4:hover, h5:hover, h6:hover {
+  transform: scale(1.05); /* Slightly increase size on hover */
+}
+
+/* Additional Styling for Specific Headings */
+h1 {
+  font-size: 2.5em; /* Larger size for main titles */
+}
+
+h2 {
+  font-size: 2em; /* Slightly smaller than h1 */
+}
+
+h3 {
+  font-size: 1.75em; /* Slightly smaller than h2 */
+}
+
+/* ... continue with h4, h5, h6 as needed ... */
