@@ -12,7 +12,10 @@ import LandingPage from "./components/LandingPage/LandingPage";
 // import GamePage from "./components/GamePage/GamePage";
 import NavBar from "./components/NavBar/NavBar";
 import SinglePlayerGame from "./components/SinglePlayerGame/SinglePlayerGame";
-import MultiplayerGame from "./components/MultiPlayerGame/MultiPlayerGame";
+import GamePage from "./components/GamePage/GamePage";
+// import MultiplayerGame from "./components/MultiPlayerGame/MultiPlayerGame";
+import MultiplayerGamePage from "./components/MultiplayerGamePage/MultiplayerGamePage";
+import Lobby from "./components/Lobby/Lobby";
 import UserProfile from "./components/UserProfile/UserProfile"; // Your user profile component
 // import Login from "./components/Login/Login"; // Your login component
 import "./App.css";
@@ -43,14 +46,38 @@ function App() {
                 </ProtectedRoute>
               }
             />
-            <Route
+            {/* <Route
               path="/game/multiplayer"
               element={
                 <ProtectedRoute>
                   <MultiplayerGame />
                 </ProtectedRoute>
               }
+            /> */}
+
+            <Route
+              path="/game/multiplayer"
+              element={
+                <ProtectedRoute>
+                  <Lobby />
+                </ProtectedRoute>
+              }
             />
+
+            <Route
+              path="/lobby"
+              element={
+                <ProtectedRoute>
+                  <Lobby />
+                </ProtectedRoute>
+              }
+            />
+
+            <Route 
+            path="/game/:gameCode" element={
+              <ProtectedRoute>
+              <MultiplayerGamePage />
+              </ProtectedRoute>} />
           </Routes>
         </div>
       </Router>

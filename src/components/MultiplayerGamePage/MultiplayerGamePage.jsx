@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
-import Board from "../Board/Board"; // Your Board component
-import { app, auth, db, database } from "../../firebaseConfig";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { getDatabase, ref, onValue, update } from "firebase/database";
+import MultiplayerBoard from "../MultiplayerBoard/MultiplayerBoard";
 
-const GamePage = () => {
+const MultiplayerGamePage = () => {
   const { gameCode } = useParams();
-  const navigate = useNavigate();
+  const database = getDatabase();
   const [gameData, setGameData] = useState({
     board: Array(9).fill(null),
     currentPlayer: null,
@@ -26,7 +25,7 @@ const GamePage = () => {
     return () => {
       unsubscribe();
     };
-  }, [gameCode]);
+  }, [gameCode, database]);
 
   const handleMove = (index) => {
     if (
@@ -48,39 +47,16 @@ const GamePage = () => {
     }
   };
 
-  const restartGame = () => {
-    if (gameData && gameData.player1) {
-      update(ref(database, `games/${gameCode}`), {
-        board: Array(9).fill(null),
-        currentPlayer: gameData.player1,
-      });
-    } else {
-      console.error("Unable to restart game: player1 is undefined");
-      // Handle the scenario appropriately
-    }
-  };
-
-  const backToLobby = () => {
-    navigate("/lobby");
-  };
-
   return (
-    <div className="game-page">
-      <h1>Tic-Tac-Toe</h1>
+    <div className="multiplayer-game-page">
+      <h1>Multiplayer Tic-Tac-Toe</h1>
       <h2>Game Code: {gameCode}</h2>
-      {gameData.currentPlayer && (
-        <p>Current Turn: Player {gameData.currentPlayer}</p>
+      {gameData.board && (
+        <MultiplayerBoard board={gameData.board} onSquareClick={handleMove} />
       )}
-      <Board
-        board={gameData.board}
-        onSquareClick={handleMove}
-        currentPlayer={gameData.currentPlayer}
-      />
-      <button onClick={restartGame}>Restart Game</button>
-      <button onClick={backToLobby}>Back to Lobby</button>
-      {/* You can add more game-related information or components here */}
+      {/* Additional game info and components */}
     </div>
   );
 };
 
-export default GamePage;
+export default MultiplayerGamePage;

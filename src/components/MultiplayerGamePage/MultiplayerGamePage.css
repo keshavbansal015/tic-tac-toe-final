@@ -1,0 +1,14 @@
+.multiplayer-game-page {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.multiplayer-game-page h1 {
+    margin-bottom: 15px;
+}
+
+.multiplayer-game-page h2 {
+    margin-bottom: 20px;
+}
+
+/* Additional styling for the game page can go here */

@@ -1,0 +1,40 @@
+.multiplayer-square {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 100px;
+    background-color: #f0f0f0;
+    border: 2px solid #ddd;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.multiplayer-square:hover {
+    background-color: #e9e9e9;
+}
+
+/* Additional styling for the squares can go here */
+.square {
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2em;
+    color: #333;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .square:hover {
+    background-color: #e4e4e4;
+  }
+  
+  .square.X {
+    color: #ff4500; /* Or any color for X */
+  }
+  
+  .square.O {
+    color: #0045ff; /* Or any color for O */
+  }

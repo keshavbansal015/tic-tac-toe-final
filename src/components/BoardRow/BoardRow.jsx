@@ -8,13 +8,6 @@ const BoardRow = ({ row, board, onClick }) => {
             {Array(3).fill(null).map((_, col) => {
                 const index = row * 3 + col;
                 return (
-                    // <button 
-                    //     key={index} 
-                    //     className="square" 
-                    //     onClick={() => onClick(index)}
-                    // >
-                    //     {board[index]}
-                    // </button>
                     <Square 
                         key={index} 
                         value={board[index]} 
