@@ -4,14 +4,15 @@ import { app, auth, db, database } from "../firebaseConfig";
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [currentUser, setCurrentUser] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [currentUser, setCurrentUser] = useState(() => null);
+  const [loading, setLoading] = useState(() => true);
   // const auth = getAuth();
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setCurrentUser(user);
-      setLoading(false);
+      setLoading(false); 
+      // Loading = False means we have an authenticated user, so we can just load the page
     });
 
     return unsubscribe;
@@ -19,7 +20,8 @@ export const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider value={{ currentUser, loading }}>
-      {!loading && children}
+      {!loading && children} 
+      {/* using Loading here */}
     </AuthContext.Provider>
   );
 };

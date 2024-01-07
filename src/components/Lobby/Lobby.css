@@ -2,28 +2,29 @@
     text-align: center;
 }
 
-.lobby ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-.lobby li {
-    margin: 10px 0;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-}
-
-.lobby button {
-    margin-top: 10px;
-    padding: 5px 10px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 4px;
+.button-game {
+    background-image: linear-gradient(to right, #5585d1, rgb(184, 83, 212)); /* Adjusted gradient effect to match landing page */
+    color: #ffffff; /* White text color for contrast */
+    padding: 12px 25px;
     cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    border-radius: 30px; /* Rounded corners */
+    border: 3px solid #ffffff; /* White border for contrast */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    font-size: 1em;
+    letter-spacing: 1.5px; /* Increased spacing between letters */
+    margin: 10px; /* Margin around each button */
+    display: inline-block; /* Inline display for alignment */
+    text-shadow: 0.5px 0.5px 1px rgba(0, 0, 0, 0.5); /* Text shadow for depth */
 }
-
-.lobby button:hover {
-    background-color: #45a049;
-}
+.button-game:hover {
+    background-image: linear-gradient(
+        to right,
+        #5585d1,
+        #6dd5fa
+      ); /* Invert gradient on hover */
+      box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15); /* Larger shadow on hover */
+      /* transform: translateY(-2px); Slight lift on hover */
+      border: 2px solid #ff758c; /* Change border color on hover */
+    }

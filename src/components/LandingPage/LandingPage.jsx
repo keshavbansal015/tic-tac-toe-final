@@ -46,9 +46,9 @@ const LandingPage = () => {
     navigate("/game/singleplayer"); // Adjust the path as per your routing setup
   };
 
-  // const startMultiPlayerGame = () => {
-  //   navigate("/game/multiplayer"); // Adjust the path as per your routing setup
-  // };
+  const startMultiPlayerGame = () => {
+    navigate("/game/lobby"); // Adjust the path as per your routing setup
+  };
 
   return (
     <div className="landing-page">

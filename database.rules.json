@@ -5,6 +5,10 @@
     "games": {
       ".read": "auth != null",
       ".write": "auth != null"
+    },
+    "usersInLobby": {
+      ".read": "auth != null",
+      ".write": "auth != null"
     }
   }
 }
