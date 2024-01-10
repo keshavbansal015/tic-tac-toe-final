@@ -28,3 +28,6 @@
       /* transform: translateY(-2px); Slight lift on hover */
       border: 2px solid #ff758c; /* Change border color on hover */
     }
+li {
+    list-style-type: none; 
+}

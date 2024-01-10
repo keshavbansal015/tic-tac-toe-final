@@ -7,12 +7,13 @@ import {
   useNavigate,
 } from "react-router-dom";
 import { AuthProvider, AuthContext } from "./contexts/AuthContext";
+// import UserGameListener from "./components/UserGameListener/UserGameListener";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 import LandingPage from "./components/LandingPage/LandingPage";
 // import GamePage from "./components/GamePage/GamePage";
 import NavBar from "./components/NavBar/NavBar";
 import SinglePlayerGame from "./components/SinglePlayerGame/SinglePlayerGame";
-import GamePage from "./components/GamePage/GamePage";
+// import GamePage from "./components/GamePage/GamePage";
 // import MultiplayerGame from "./components/MultiPlayerGame/MultiPlayerGame";
 import MultiplayerGamePage from "./components/MultiplayerGamePage/MultiplayerGamePage";
 import Lobby from "./components/Lobby/Lobby";
@@ -73,11 +74,14 @@ function App() {
               }
             />
 
-            <Route 
-            path="/game/:gameCode" element={
-              <ProtectedRoute>
-              <MultiplayerGamePage />
-              </ProtectedRoute>} />
+            <Route
+              path="/game/:matchId"
+              element={
+                <ProtectedRoute>
+                  <MultiplayerGamePage />
+                </ProtectedRoute>
+              }
+            />
           </Routes>
         </div>
       </Router>

@@ -5,98 +5,93 @@ import { useNavigate } from "react-router-dom";
 import { database, db } from "../../firebaseConfig";
 import { AuthContext } from "../../contexts/AuthContext";
 import generateGameCode from "../../utils/generateCode";
+// import UserGameListener from "../UserGameListener/UserGameListener";
 import "./Lobby.css";
 
-
 const Lobby = () => {
-  const [usersInLobby, setUsersInLobby] = useState([]);
+  const [playersInLobby, setPlayersInLobby] = useState([]);
   const navigate = useNavigate();
   const { currentUser } = useContext(AuthContext);
-  const currentUserId = currentUser?.uid;
-
+  
   useEffect(() => {
-    const usersRef = ref(database, "usersInLobby");
-    const userGameCode = generateGameCode();
+    // Join the lobby when the component mounts
+    joinLobby(currentUser);
 
-    // Function to fetch usernames from Firestore
-    const fetchUsernames = async (usersData) => {
-      if (!usersData) return;
-
-      try {
-        const usersPromises = Object.entries(usersData)
-          .filter(([id, _]) => id !== currentUserId)
-          .map(async ([id, value]) => {
-            const userDoc = await getDoc(doc(db, "users", id));
-            const username = userDoc.exists()
-              ? userDoc.data().username
-              : "Unknown User";
-            return { id, username, gameCode: value.gameCode };
-          });
-
-        const resolvedUsers = await Promise.all(usersPromises);
-        setUsersInLobby(resolvedUsers);
-      } catch (error) {
-        console.error("Error fetching usernames: ", error);
-      }
-    };
-
-    if (currentUserId) {
-      set(ref(database, `usersInLobby/${currentUserId}`), {
-        gameCode: userGameCode,
-      }).catch((error) => console.error("Error adding user to lobby: ", error));
-    }
-
-    const unsubscribe = onValue(usersRef, (snapshot) => {
-      fetchUsernames(snapshot.val());
+    const playersRef = ref(database, "playersInLobby/");
+    const unsubscribe = onValue(playersRef, (snapshot) => {
+      const players = snapshot.val();
+      const playersList = players
+        ? Object.keys(players).map((key) => ({
+            id: key,
+            ...players[key],
+          }))
+        : [];
+      setPlayersInLobby(playersList);
     });
 
-    return () => {
-      unsubscribe();
-      if (currentUserId) {
-        remove(ref(database, `usersInLobby/${currentUserId}`)).catch((error) =>
-          console.error("Error removing user from lobby: ", error)
-        );
+    const userRef = ref(database, `users/${currentUser.uid}`);
+    const unsubscribeUser = onValue(userRef, (snapshot) => {
+      const userData = snapshot.val();
+      if (userData && userData.pendingMatch) {
+        navigate(`/game/${userData.pendingMatch}`);
       }
-    };
-  }, [currentUserId]);
+    });
 
-  const joinGame = (gameCode) => {
-    navigate(`/multiplayer-game/${gameCode}`);
-    if (currentUserId) {
-      remove(ref(database, `usersInLobby/${currentUserId}`)).catch((error) =>
-        console.error("Error removing user from lobby: ", error)
-      );
-    }
+    // Leave the lobby when the component unmounts
+    return () => {
+      leaveLobby(currentUser);
+      unsubscribe();
+      unsubscribeUser();
+    };
+  }, [currentUser, navigate]);
+
+  const joinLobby = (user) => {
+    // Add the current user to the playersInLobby node
+    set(ref(database, `playersInLobby/${user.uid}`), {
+      name: user.displayName,
+      uid: user.uid,
+    });
   };
 
-  //   return (
-  //     <div>
-  //       <h2>Lobby</h2>
-  //       <ul>
-  //         {usersInLobby.map((user) => (
-  //           <li key={user.id} onClick={() => joinGame(user.gameCode)}>
-  //             {user.id}
-  //              {/* - Game Code: {user.gameCode} */}
-  //           </li>
-  //         ))}
-  //       </ul>
-  //     </div>
-  //   );
-  // };
+  const leaveLobby = (user) => {
+    // Remove the user from the playersInLobby node
+    remove(ref(database, `playersInLobby/${user.uid}`));
+  };
+
+  const handleSelectOpponent = (opponentId) => {
+    const matchId = generateGameCode();
+    set(ref(database, `ongoingMatches/${matchId}`), {
+      player1Id: currentUser.uid,
+      player1Name: currentUser.displayName,
+      player2Id: opponentId,
+      player2Name: ref(database, `users/${opponentId}`).name,
+    });
+
+    // Update the pendingMatch for both users
+    set(ref(database, `users/${currentUser.uid}/pendingMatch`), matchId);
+    set(ref(database, `users/${opponentId}/pendingMatch`), matchId);
+
+    leaveLobby(currentUser);
+    remove(ref(database, `playersInLobby/${opponentId}`));
+    navigate(`/game/${matchId}`);
+  };
 
   return (
-    <div>
+    <div className="lobby">
       <h2>Lobby</h2>
       <ul>
-        {usersInLobby.map((user) => (
-          <li key={user.id} onClick={() => joinGame(user.gameCode)}>
-            <button className="button-game">
-              {/* Username:  */}
-              {user.id}
-              {/* - Game Code: {user.gameCode} */}
-            </button>
-          </li>
-        ))}
+        {playersInLobby
+          .filter((player) => player.uid !== currentUser.uid) // Filter out the current player
+          .map((player) => (
+            <li key={player.uid}>
+              <button
+                className="button-game"
+                onClick={() => handleSelectOpponent(player.uid)}
+              >
+                {player.name}
+              </button>
+            </li>
+          ))}
       </ul>
     </div>
   );
