@@ -10,7 +10,6 @@ const calculateWinner = (squares) => {
     [0, 4, 8],
     [2, 4, 6], // Diagonals
   ];
-
   // Check if there's a winning combination
   for (let i = 0; i < lines.length; i++) {
     const [a, b, c] = lines[i];
@@ -18,7 +17,6 @@ const calculateWinner = (squares) => {
       return squares[a]; // Return 'X' or 'O'
     }
   }
-
   // Return null if no winner
   return null;
 };

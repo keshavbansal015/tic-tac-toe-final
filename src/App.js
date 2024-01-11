@@ -1,25 +1,29 @@
-import logo from "./logo.svg";
-import React, { useContext, useEffect } from "react";
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
-  useNavigate,
-} from "react-router-dom";
-import { AuthProvider, AuthContext } from "./contexts/AuthContext";
-// import UserGameListener from "./components/UserGameListener/UserGameListener";
-import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
-import LandingPage from "./components/LandingPage/LandingPage";
-// import GamePage from "./components/GamePage/GamePage";
-import NavBar from "./components/NavBar/NavBar";
-import SinglePlayerGame from "./components/SinglePlayerGame/SinglePlayerGame";
-// import GamePage from "./components/GamePage/GamePage";
-// import MultiplayerGame from "./components/MultiPlayerGame/MultiPlayerGame";
-import MultiplayerGamePage from "./components/MultiplayerGamePage/MultiplayerGamePage";
-import Lobby from "./components/Lobby/Lobby";
-import UserProfile from "./components/UserProfile/UserProfile"; // Your user profile component
-// import Login from "./components/Login/Login"; // Your login component
+// Navigation / Routing
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { ROUTES } from "./constants/routes";
+
+// View components
+  // Other Components
+import NavBar from "./ProjectComponents/OtherComponents/Components/NavBar";
+import LandingPage from "./ProjectComponents/OtherComponents/Components/LandingPage";
+import UserProfile from "./ProjectComponents/OtherComponents/Components/UserProfile";
+import ProtectedRoute from "./ProjectComponents/OtherComponents/Components/ProtectedRoute";
+  // SingpleplayerGameComponents
+import SinglePlayerGame from "./ProjectComponents/SinglePlayerGameComponents/Components/SinglePlayerGame";
+  // MultiplayerGameComponents
+  import Lobby from "./ProjectComponents/MultiplayerGameComponents/Components/Lobby";
+  import MultiplayerGamePage from "./ProjectComponents/MultiplayerGameComponents/Components/MultiplayerGamePage";
+
+// Assets
 import "./App.css";
+
+// Others
+import { AuthProvider } from "./contexts/AuthContext";
+import React from "react";
+
+const ProtectedRouteWrapper = ({ children }) => (
+  <ProtectedRoute>{children}</ProtectedRoute>
+);
 
 function App() {
   return (
@@ -28,60 +32,21 @@ function App() {
         <NavBar />
         <div className="page-content">
           <Routes>
-            <Route path="/" element={<LandingPage />} />
-            <Route path="/login" element={<LandingPage />} />
+            <Route path={ROUTES.LOGIN} element={<LandingPage />} />
+            <Route path={ROUTES.HOME} element={<LandingPage />} />
+            <Route path={ROUTES.PROFILE} element={<ProtectedRouteWrapper><UserProfile /></ProtectedRouteWrapper>}/>
 
-            <Route
-              path="/profile"
-              element={
-                <ProtectedRoute>
-                  <UserProfile />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/game/singleplayer"
-              element={
-                <ProtectedRoute>
-                  <SinglePlayerGame />
-                </ProtectedRoute>
-              }
-            />
-            {/* <Route
-              path="/game/multiplayer"
-              element={
-                <ProtectedRoute>
-                  <MultiplayerGame />
-                </ProtectedRoute>
-              }
-            /> */}
+            {/* Single Player game */}
+            <Route path={ROUTES.GAME_SINGLEPLAYER} 
+              element={<ProtectedRouteWrapper><SinglePlayerGame /></ProtectedRouteWrapper>}/>
 
-            <Route
-              path="/game/multiplayer"
-              element={
-                <ProtectedRoute>
-                  <Lobby />
-                </ProtectedRoute>
-              }
-            />
-
-            <Route
-              path="/lobby"
-              element={
-                <ProtectedRoute>
-                  <Lobby />
-                </ProtectedRoute>
-              }
-            />
-
-            <Route
-              path="/game/:matchId"
-              element={
-                <ProtectedRoute>
-                  <MultiplayerGamePage />
-                </ProtectedRoute>
-              }
-            />
+            {/* Multiplayer game */}
+            <Route path={`${ROUTES.GAME}/:matchId`}
+              element={<ProtectedRouteWrapper><MultiplayerGamePage /></ProtectedRouteWrapper>}/>
+            <Route path={ROUTES.GAME_MULTIPLAYER}
+              element={<ProtectedRouteWrapper><Lobby /></ProtectedRouteWrapper>}/>
+            <Route path={ROUTES.LOBBY}
+              element={<ProtectedRouteWrapper><Lobby /></ProtectedRouteWrapper>}/>
           </Routes>
         </div>
       </Router>
