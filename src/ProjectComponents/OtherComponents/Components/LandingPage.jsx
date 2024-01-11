@@ -2,7 +2,7 @@ import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { app, auth, db, database } from "../../../firebaseConfig";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { AuthContext } from "../../../contexts/AuthContext";
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import "../CSS/LandingPage.css";
 
@@ -18,7 +18,7 @@ const LandingPage = () => {
         const user = result.user;
         createUserRecord(user).then(() => {
           console.log("User signed in:", user);
-          navigate("/profile"); // Redirect after successful sign-in
+          navigate("/profile");
         });
       })
       .catch((error) => {
@@ -34,7 +34,6 @@ const LandingPage = () => {
       await setDoc(userRef, {
         email: user.email,
         name: user.displayName || "",
-        // ... other user properties you want to save
         wins: user.wins || 0,
         loses: user.losses || 0,
         draws: user.draws || 0,
@@ -43,11 +42,11 @@ const LandingPage = () => {
   };
 
   const startSinglePlayerGame = () => {
-    navigate("/game/singleplayer"); // Adjust the path as per your routing setup
+    navigate("/game/singleplayer");
   };
 
   const startMultiPlayerGame = () => {
-    navigate("/game/lobby"); // Adjust the path as per your routing setup
+    navigate("/game/lobby");
   };
 
   return (
@@ -60,10 +59,10 @@ const LandingPage = () => {
       <main className="landing-main">
         <section className="game-description">
           <h2>How to Play:</h2>
-            <p>Sign in with your Google account.</p>
-            <p>Choose to start a new game or join an existing one.</p>
-            <p>Take turns to place your mark (X or O) in the grid.</p>
-            <p>The first player to align three marks wins!</p>
+          <p>Sign in with your Google account.</p>
+          <p>Choose to start a new game or join an existing one.</p>
+          <p>Take turns to place your mark (X or O) in the grid.</p>
+          <p>The first player to align three marks wins!</p>
         </section>
 
         <section className="landing-actions">
@@ -86,6 +85,9 @@ const LandingPage = () => {
               </button>
               <button className="play-button" onClick={startSinglePlayerGame}>
                 Play
+              </button>
+              <button className="play-button" onClick={startMultiPlayerGame}>
+                Lobby
               </button>
             </div>
           )}

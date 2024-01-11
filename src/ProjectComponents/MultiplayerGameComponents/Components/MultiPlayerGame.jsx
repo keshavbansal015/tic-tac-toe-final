@@ -1,8 +1,8 @@
-import Board from "../Board/Board";
+import Board from "../../BoardComponents/Components/Board";
 import React, { useState, useEffect } from "react";
 import calculateWinner from "../../../utils/calculateWinner";
 import { db, auth, database, app } from "../../../firebaseConfig";
-import "./MultiplayerGame.css";
+import "../CSS/MultiplayerGame.css";
 import {
   getDatabase,
   ref,

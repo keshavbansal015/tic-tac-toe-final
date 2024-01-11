@@ -1,14 +1,14 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../contexts/AuthContext";
-import { useNavigate } from "react-router-dom";
-import { app, auth, db, database } from "../../../firebaseConfig";
 import { doc, getDoc } from "firebase/firestore";
+import { useNavigate } from "react-router-dom";
+import { db } from "../../../firebaseConfig";
 import "../CSS/UserProfile.css";
 
 const UserProfile = () => {
-  const { currentUser } = useContext(AuthContext);
   const navigate = useNavigate();
   const [userData, setUserData] = useState(null);
+  const { currentUser } = useContext(AuthContext);
 
   useEffect(() => {
     if (currentUser) {
@@ -29,17 +29,16 @@ const UserProfile = () => {
   }, [currentUser]);
 
   const startSinglePlayerGame = () => {
-    navigate("/game/singleplayer"); // Adjust the path as per your routing setup
+    navigate("/game/singleplayer");
   };
 
-  // const startMultiPlayerGame = () => {
-  //     navigate('/game/multiplayer'); // Adjust the path as per your routing setup
-  // };
+  const startMultiPlayerGame = () => {
+    navigate("/game/multiplayer");
+  };
   return (
     <div className="user-profile">
       <h2>{userData?.name || "User"}</h2>
       <div className="stats">
-        {/* <p>{currentUser?.email}</p> */}
         <p>Wins: {userData?.wins || 0}</p>
         <p>Losses: {userData?.losses || 0}</p>
         <p>Draws: {userData?.draws || 0}</p>
@@ -47,7 +46,9 @@ const UserProfile = () => {
       <button onClick={startSinglePlayerGame} className="play-button">
         Play
       </button>
-      {/* The multiplayer functionality is commented out until needed */}
+      <button onClick={startMultiPlayerGame} className="play-button">
+        Lobby
+      </button>
     </div>
   );
 };

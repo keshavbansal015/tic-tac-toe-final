@@ -1,16 +1,16 @@
 import React, { useState, useEffect, useContext } from "react";
 import { ref, set, onValue, remove } from "firebase/database";
-import { useNavigate } from "react-router-dom";
-import { database, db } from "../../../firebaseConfig";
 import { AuthContext } from "../../../contexts/AuthContext";
 import generateGameCode from "../../../utils/generateCode";
+import { database, db } from "../../../firebaseConfig";
+import { useNavigate } from "react-router-dom";
 import "../CSS/Lobby.css";
 
 const Lobby = () => {
   const [playersInLobby, setPlayersInLobby] = useState([]);
   const navigate = useNavigate();
   const { currentUser } = useContext(AuthContext);
-  
+
   useEffect(() => {
     // Join the lobby when the component mounts
     joinLobby(currentUser);
