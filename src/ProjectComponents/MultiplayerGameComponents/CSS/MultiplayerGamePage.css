@@ -1,6 +1,8 @@
 .multiplayer-game-page {
+    /* text-align: center; */
+    /* margin-top: 50px; */
     text-align: center;
-    margin-top: 20px;
+    padding: 12px 25px;
 }
 
 .multiplayer-game-page h1 {
@@ -8,7 +10,38 @@
 }
 
 .multiplayer-game-page h2 {
+    margin-top: 20px;
     margin-bottom: 20px;
 }
 
 /* Additional styling for the game page can go here */
+.button-game {
+    background-image: linear-gradient(
+      to right,
+      #5585d1,
+      rgb(184, 83, 212)
+    ); /* Adjusted gradient effect to match landing page */
+    color: #ffffff; /* White text color for contrast */
+    padding: 12px 25px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    border-radius: 30px; /* Rounded corners */
+    border: 3px solid #ffffff; /* White border for contrast */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    font-size: 1em;
+    letter-spacing: 1.5px; /* Increased spacing between letters */
+    margin: 20px; /* Margin around each button */
+    display: inline-block; /* Inline display for alignment */
+    text-shadow: 0.5px 0.5px 1px rgba(0, 0, 0, 0.5); /* Text shadow for depth */
+  }
+  .button-game:hover {
+    background-image: linear-gradient(
+      to right,
+      #5585d1,
+      #6dd5fa
+    ); /* Invert gradient on hover */
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15); /* Larger shadow on hover */
+    /* transform: translateY(-2px); Slight lift on hover */
+    border: 2px solid #ff758c; /* Change border color on hover */
+  }

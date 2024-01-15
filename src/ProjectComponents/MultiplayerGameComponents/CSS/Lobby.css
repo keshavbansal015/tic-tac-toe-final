@@ -1,33 +1,68 @@
 .lobby {
-    text-align: center;
+  margin-top: 0;
+  text-align: center;
+  background: linear-gradient(135deg, #5585d1 0%, rgb(184, 83, 212) 100%);
+  color: #ffffff;
+  font-family: "Arial", sans-serif;
+  padding: 1.25em; /* using em instead of px */
+  margin-top: 3.75em; /* Assuming navbar height is relative */
+  height: calc(100vh - 3.75em); /* Full viewport height minus navbar height */
+  overflow-y: auto; /* Scroll if content exceeds screen height */
+  display: flex;
+  flex-direction: column;
 }
 
 .button-game {
-    background-image: linear-gradient(to right, #5585d1, rgb(184, 83, 212)); /* Adjusted gradient effect to match landing page */
-    color: #ffffff; /* White text color for contrast */
-    padding: 12px 25px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: all 0.3s ease;
-    border-radius: 30px; /* Rounded corners */
-    border: 3px solid #ffffff; /* White border for contrast */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-    font-size: 1em;
-    letter-spacing: 1.5px; /* Increased spacing between letters */
-    margin: 10px; /* Margin around each button */
-    display: inline-block; /* Inline display for alignment */
-    text-shadow: 0.5px 0.5px 1px rgba(0, 0, 0, 0.5); /* Text shadow for depth */
+  background-image: linear-gradient(
+    to right,
+    #5585d1,
+    rgb(184, 83, 212)
+  ); /* Adjusted gradient effect to match landing page */
+  color: #ffffff; /* White text color for contrast */
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  border-radius: 30px; /* Rounded corners */
+  border: 3px solid #ffffff; /* White border for contrast */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  letter-spacing: 1.5px; /* Increased spacing between letters */
+  display: inline-block; /* Inline display for alignment */
+  text-shadow: 0.5px 0.5px 1px rgba(0, 0, 0, 0.5); /* Text shadow for depth */
+  padding: 0.75em 1.56em; /* using em instead of px */
+  font-size: 1em; /* Adjust font size if necessary */
+  margin: 0.625em; /* using em instead of px */
 }
 .button-game:hover {
-    background-image: linear-gradient(
-        to right,
-        #5585d1,
-        #6dd5fa
-      ); /* Invert gradient on hover */
-      box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15); /* Larger shadow on hover */
-      /* transform: translateY(-2px); Slight lift on hover */
-      border: 2px solid #ff758c; /* Change border color on hover */
-    }
+  background-image: linear-gradient(
+    to right,
+    #5585d1,
+    #6dd5fa
+  ); /* Invert gradient on hover */
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15); /* Larger shadow on hover */
+  /* transform: translateY(-2px); Slight lift on hover */
+  border: 2px solid #ff758c; /* Change border color on hover */
+}
 li {
-    list-style-type: none; 
+  list-style-type: none;
+}
+
+@media (max-width: 768px) {
+  .lobby {
+    padding: 1em;
+    margin-top: 60px; /* Adjust for smaller screens */
+  }
+  .button-game {
+    padding: 0.5em 1em;
+    font-size: 0.9em;
+  }
+}
+
+@media (max-width: 480px) {
+  .lobby {
+    padding: 0.5em;
+  }
+  .button-game {
+    padding: 0.4em 0.8em;
+    font-size: 0.8em;
+  }
 }

@@ -20,5 +20,5 @@
 
 /* Optional: If you still see spacing issues, you may target the squares directly */
 .board-row .square {
-  margin: 1px; /* Remove margin to ensure squares are tightly packed */
+  margin: 2px; /* Remove margin to ensure squares are tightly packed */
 }

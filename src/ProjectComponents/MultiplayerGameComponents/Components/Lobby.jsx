@@ -74,13 +74,14 @@ const Lobby = () => {
       } else {
         turn = opponentId
       }
+      console.log(player2Name__)
       set(ref(database, `games/${matchId}`), {
         player1Id: currentUser.uid,
         player1Name: currentUser.displayName || "Player 1",
         player2Id: opponentId,
         player2Name: player2Name__,
-        matchState: new Array(9).fill(""),
-        result: null,
+        matchState: [".", ".", ".", ".", ".", ".", ".", ".", "."],
+        result: "",
         turn:turn,
       });
     });
