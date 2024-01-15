@@ -2,15 +2,21 @@
   "rules": {
     ".read": false,
     ".write": false,
+
     "playersInLobby": {
       ".read": "auth != null",
       ".write": "auth != null"
     },
-    "games": {
-      "$gameId": {
-        ".read": "auth != null",
-        ".write": "auth != null"
-      },
+	  "games": {
+  	 	"$gameId": {
+          // Only authenticated users can read games
+          ".read": "auth != null",
+
+          // General write rule: only authenticated users can write
+          ".write": "auth != null",
+	      },
+
+					// Specific rules for game properties
       "player1Id": {
         ".write": "auth != null"
       },
@@ -18,11 +24,13 @@
         ".write": "auth != null"
       },
       "gameState": {
+        // Example: Allow updates to game state only if the user is one of the players
         ".write": "auth != null"
       },
       "result": {
+        // Example: Allow result to be set only if it's not already set
         ".write": "auth != null && !data.exists()"
       }
     }
-  }
+	}
 }
