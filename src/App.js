@@ -13,7 +13,7 @@ import SinglePlayerGame from "./ProjectComponents/SinglePlayerGameComponents/Com
 // MultiplayerGameComponents
 import Lobby from "./ProjectComponents/MultiplayerGameComponents/Components/Lobby";
 import MultiplayerGamePage from "./ProjectComponents/MultiplayerGameComponents/Components/MultiplayerGamePage";
-import MultiplayerGame from "./ProjectComponents/MultiplayerGameComponents/Components/MultiPlayerGame";
+// import MultiplayerGame from "./ProjectComponents/MultiplayerGameComponents/Components/MultiPlayerGame";
 // Assets
 import "./App.css";
 
@@ -58,8 +58,8 @@ function App() {
               path={`${ROUTES.GAME}/:matchId`}
               element={
                 <ProtectedRouteWrapper>
-                  {/* <MultiplayerGamePage /> */}
-                  <MultiplayerGame />
+                  <MultiplayerGamePage />
+                  {/* <MultiplayerGame /> */}
                 </ProtectedRouteWrapper>
               }
             />

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { database } from "../../../firebaseConfig";
+import { database } from "../../../../firebaseConfig";
 import { ref, set, onValue, remove } from "firebase/database";
 const MatchComponent = () => {
     const { matchId } = useParams();

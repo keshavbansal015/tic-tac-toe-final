@@ -1,8 +1,8 @@
 import { useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { ref, onValue } from "firebase/database";
-import { database } from "../../../firebaseConfig";
-import { AuthContext } from "../../../contexts/AuthContext";
+import { database } from "../../../../firebaseConfig";
+import { AuthContext } from "../../../../contexts/AuthContext";
 
 const UserGameListener = () => {
     const navigate = useNavigate();
@@ -20,7 +20,7 @@ const UserGameListener = () => {
         return () => unsubscribe();
     }, [currentUser, navigate]);
 
-    return null;
+    // return null;
 };
 
 export default UserGameListener;

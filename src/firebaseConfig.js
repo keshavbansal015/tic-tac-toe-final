@@ -20,7 +20,9 @@ const app = initializeApp(firebaseConfig);
 
 // Initialize Firebase services
 const db = getFirestore(app);
+// authentication provider
 const auth = getAuth(app);
+// Realtime database
 const database = getDatabase(app);
 
 // Export the Firebase services for use in your app

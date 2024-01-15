@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import Board from "../../BoardComponents/Components/Board";
-import { app, auth, db, database } from "../../../firebaseConfig";
+import Board from "../../../BoardComponents/Components/Board";
+import { app, auth, db, database } from "../../../../firebaseConfig";
 import { useParams, useNavigate } from "react-router-dom";
 import { getDatabase, ref, onValue, update } from "firebase/database";
 
