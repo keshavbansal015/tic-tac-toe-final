@@ -2,13 +2,27 @@
   "rules": {
     ".read": false,
     ".write": false,
-    "games": {
+    "playersInLobby": {
       ".read": "auth != null",
       ".write": "auth != null"
     },
-    "usersInLobby": {
-      ".read": "auth != null",
-      ".write": "auth != null"
+    "games": {
+      "$gameId": {
+        ".read": "auth != null",
+        ".write": "auth != null"
+      },
+      "player1Id": {
+        ".write": "auth != null"
+      },
+      "player2Id": {
+        ".write": "auth != null"
+      },
+      "gameState": {
+        ".write": "auth != null"
+      },
+      "result": {
+        ".write": "auth != null && !data.exists()"
+      }
     }
   }
 }

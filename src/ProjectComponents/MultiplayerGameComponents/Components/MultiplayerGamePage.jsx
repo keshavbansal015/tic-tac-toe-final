@@ -96,29 +96,17 @@ const MultiplayerGamePage = () => {
       navigate("/lobby");
       return;
     }
-  
-    // const removePlayerFromLobby = (playerId) => {
-    //   if (playerId) {
-    //     remove(ref(database, `playersInLobby/${playerId}`))
-    //       .catch(error => console.error("Error removing player from lobby:", error));
-    //   }
-    // };
-  
-    // // Remove players from the lobby
-    // removePlayerFromLobby(gameData.player1Id);
-    // removePlayerFromLobby(gameData.player2Id);
-  
+
     // Remove game record from Firebase
     if (matchId) {
       remove(ref(database, `games/${matchId}`))
         .then(() => navigate("/lobby"))
-        .catch(error => console.error("Error removing game record:", error));
+        .catch((error) => console.error("Error removing game record:", error));
     } else {
       console.error("No matchId found");
       navigate("/lobby");
     }
   };
-  
 
   return (
     <div className="multiplayer-game-page">
