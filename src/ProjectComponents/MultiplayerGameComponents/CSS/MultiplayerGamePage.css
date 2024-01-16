@@ -1,47 +1,99 @@
 .multiplayer-game-page {
-    /* text-align: center; */
-    /* margin-top: 50px; */
-    text-align: center;
-    padding: 12px 25px;
+  /* text-align: center; */
+  /* margin-top: 50px; */
+  text-align: center;
+  padding: 12px 25px;
 }
 
 .multiplayer-game-page h1 {
-    margin-bottom: 15px;
+  margin-bottom: 15px;
 }
 
 .multiplayer-game-page h2 {
-    margin-top: 20px;
-    margin-bottom: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 /* Additional styling for the game page can go here */
 .button-game {
-    background-image: linear-gradient(
-      to right,
-      #5585d1,
-      rgb(184, 83, 212)
-    ); /* Adjusted gradient effect to match landing page */
-    color: #ffffff; /* White text color for contrast */
-    padding: 12px 25px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: all 0.3s ease;
-    border-radius: 30px; /* Rounded corners */
-    border: 3px solid #ffffff; /* White border for contrast */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-    font-size: 1em;
-    letter-spacing: 1.5px; /* Increased spacing between letters */
-    margin: 20px; /* Margin around each button */
-    display: inline-block; /* Inline display for alignment */
-    text-shadow: 0.5px 0.5px 1px rgba(0, 0, 0, 0.5); /* Text shadow for depth */
+  background-image: linear-gradient(
+    to right,
+    #5585d1,
+    rgb(184, 83, 212)
+  ); /* Adjusted gradient effect to match landing page */
+  color: #ffffff; /* White text color for contrast */
+  padding: 12px 25px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  border-radius: 30px; /* Rounded corners */
+  border: 3px solid #ffffff; /* White border for contrast */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  font-size: 1em;
+  letter-spacing: 1.5px; /* Increased spacing between letters */
+  margin: 20px; /* Margin around each button */
+  display: inline-block; /* Inline display for alignment */
+  text-shadow: 0.5px 0.5px 1px rgba(0, 0, 0, 0.5); /* Text shadow for depth */
+}
+.button-game:hover {
+  background-image: linear-gradient(
+    to right,
+    #5585d1,
+    #6dd5fa
+  ); /* Invert gradient on hover */
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15); /* Larger shadow on hover */
+  /* transform: translateY(-2px); Slight lift on hover */
+  border: 2px solid #ff758c; /* Change border color on hover */
+}
+
+@keyframes winnerAnimation {
+  0%,
+  100% {
+    transform: scale(1);
+    color: #4caf50; /* Green */
+    text-shadow: 0 0 10px #4caf50;
   }
-  .button-game:hover {
-    background-image: linear-gradient(
-      to right,
-      #5585d1,
-      #6dd5fa
-    ); /* Invert gradient on hover */
-    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15); /* Larger shadow on hover */
-    /* transform: translateY(-2px); Slight lift on hover */
-    border: 2px solid #ff758c; /* Change border color on hover */
+  50% {
+    transform: scale(1.2);
+    color: #ffd700; /* Gold */
+    text-shadow: 0 0 20px #ffd700;
   }
+}
+
+@keyframes loserAnimation {
+  0%,
+  100% {
+    opacity: 1;
+    color: #f44336; /* Red */
+    text-shadow: 0 0 5px #f44336;
+  }
+  50% {
+    opacity: 0.4;
+    color: #ff5722; /* Deep orange */
+    text-shadow: 0 0 15px #ff5722;
+  }
+}
+
+@keyframes drawAnimation {
+  0%,
+  100% {
+    transform: rotate(0deg);
+    color: #2196f3; /* Blue */
+    text-shadow: 0 0 5px #2196f3;
+  }
+  50% {
+    transform: rotate(10deg);
+    color: #03a9f4; /* Light Blue */
+    text-shadow: 0 0 15px #03a9f4;
+  }
+}
+
+.winner {
+  animation: winnerAnimation 2s infinite;
+}
+.loser {
+  animation: loserAnimation 2s infinite;
+}
+.draw {
+  animation: drawAnimation 2s infinite;
+}

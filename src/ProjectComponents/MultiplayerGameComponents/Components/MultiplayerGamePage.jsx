@@ -108,11 +108,56 @@ const MultiplayerGamePage = () => {
     }
   };
 
+  // Determine the player's name whose turn it is
+  const playerTurnName = gameData
+    ? gameData.turn === gameData.player1Id
+      ? gameData.player1Name
+      : gameData.player2Name
+    : "";
+
+  // Function to determine if there is a winner and return their name
+  const getWinnerName = () => {
+    if (!gameData) return null;
+    const winner = calculateWinner(gameData.matchState);
+    if (winner === "X") return gameData.player1Name;
+    if (winner === "O") return gameData.player2Name;
+    return null;
+  };
+
+  const winnerName = getWinnerName();
+  const isDraw =
+    gameData &&
+    gameData.matchState.every((cell) => cell !== ".") &&
+    !winnerName;
+
+  // Function to determine the class for each player based on the game state
+  const playerClass = (playerName) => {
+    if (winnerName) {
+      return winnerName === playerName ? "winner" : "loser";
+    }
+    if (isDraw) return "draw";
+    return "";
+  };
+
+  const gameStatus = () => {
+    if (winnerName) return `Winner: ${winnerName}`;
+    if (isDraw) return "Game Draw";
+    return `Turn: ${gameData.turn === gameData.player1Id ? gameData.player1Name : gameData.player2Name}`;
+  };
+
+
   return (
     <div className="multiplayer-game-page">
       <h2>
-        {gameData?.player1Name} vs {gameData?.player2Name}
+        <span className={playerClass(gameData?.player1Name)}>
+          {gameData?.player1Name}
+        </span>
+        <span>  vs  </span>
+        <span className={playerClass(gameData?.player2Name)}>
+          {gameData?.player2Name}
+        </span>
       </h2>
+      <h4>{gameStatus()}</h4>
       <div>
         <Board
           board={gameData?.matchState || []}
