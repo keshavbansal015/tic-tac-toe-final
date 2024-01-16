@@ -74,7 +74,7 @@ const Lobby = () => {
       } else {
         turn = opponentId
       }
-      console.log(player2Name__)
+      // console.log(turn)
       set(ref(database, `games/${matchId}`), {
         player1Id: currentUser.uid,
         player1Name: currentUser.displayName || "Player 1",

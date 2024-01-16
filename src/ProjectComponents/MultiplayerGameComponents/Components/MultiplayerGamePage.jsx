@@ -42,7 +42,7 @@ const MultiplayerGamePage = () => {
   }, [matchId]);
 
   const handleSquareClick = (index) => {
-    console.log(gameData);
+    // console.log(gameData);
     // Check if gameData and matchState are defined
     if (
       !gameData ||
@@ -140,11 +140,18 @@ const MultiplayerGamePage = () => {
   };
 
   const gameStatus = () => {
+    if (!gameData) {
+      // navigate("/lobby")
+      return "Loading game data..."; // Or any other appropriate message
+    }
     if (winnerName) return `Winner: ${winnerName}`;
     if (isDraw) return "Game Draw";
-    return `Turn: ${gameData.turn === gameData.player1Id ? gameData.player1Name : gameData.player2Name}`;
+    return `Turn: ${
+      gameData.turn === gameData.player1Id
+        ? gameData.player1Name
+        : gameData.player2Name
+    }`;
   };
-
 
   return (
     <div className="multiplayer-game-page">
@@ -152,7 +159,7 @@ const MultiplayerGamePage = () => {
         <span className={playerClass(gameData?.player1Name)}>
           {gameData?.player1Name}
         </span>
-        <span>  vs  </span>
+        <span> vs </span>
         <span className={playerClass(gameData?.player2Name)}>
           {gameData?.player2Name}
         </span>
